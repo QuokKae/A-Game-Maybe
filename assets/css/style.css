@@ -4,6 +4,18 @@
     outline: red;
 }
 
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+canvas {
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
 .game {
     width: 70vw;
     height: 40vh;
@@ -14,11 +26,11 @@
 }
 
 .character {
-    width: 2.8vw;
-    height: 9vh;
+    width: 50px;
+    height: 100px;
     background-color: greenyellow;
     position: relative;
-    top: 31vh;
-    left: 0.5vw;
+    top: 30.7vh;
+    left: 1.5vw;
 }
 
