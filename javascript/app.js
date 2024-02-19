@@ -37,9 +37,14 @@ function createSprites(){
 }
 
 function setScreen() {
+    screenRatio = getRatio();
     canvas.width = game_width;
     canvas.height = game_height;
     createSprites();
+}
+
+function getRatio() {
+    const screenH = Math.min()
 }
 
 setScreen();
