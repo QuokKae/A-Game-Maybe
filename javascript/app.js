@@ -15,12 +15,12 @@ const avatar_width = 88 / 1.5;
 const avatar_height = 94 / 1.5;
 // sets jump height
 const max_jumpH = game_height;
-const min_jumpH = 150;
+const min_jumpH = 250;
 // sets ground size & speed
 const ground_width = 2400;
 const ground_height = 24;
 const ground_speed = 0.5;
-const game_speed_start = .75;
+const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
 
 // Game Objects
@@ -95,6 +95,7 @@ function gameLoop(currentTime){
     clearScreen();
     //Update Objects
     ground.update(gameSpeed, frameTimeDelta);
+    player.update(frameTimeDelta);
 
     //Draw Objects
     player.draw();
