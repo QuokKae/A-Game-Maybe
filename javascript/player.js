@@ -9,6 +9,8 @@ export default class Player {
     falling = false;
     jump_speed = 0.6;
     gravity = 0.4;
+    running = true;
+    frameIndex = 0;
 
     constructor(ctx, width, height, minJumpH, maxJumpH, screenRatio){
         // sets canvas
@@ -28,7 +30,7 @@ export default class Player {
         this.height = height;
         // sprite positioning
         this.posX = 20 * screenRatio;
-        this.posY = this.canvas.height - this.height - 62;
+        this.posY = this.canvas.height - this.height - 22;
         this.yStand = this.posY;
 
         // player walk animation images
@@ -60,17 +62,25 @@ export default class Player {
 
     // keyboard keypress events
     keydown = (event)=>{
-        if(event.code === "ArrowUp"){
+        if(event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW"){
             this.jumpPressed = true;
         }
     }
     keyup = (event)=>{
-        if(event.code === "ArrowUp"){
+        if(event.code === "Space" || event.code === "ArrowUp" || event.code === "KeyW" ){
             this.jumpPressed = false;
         }
     }
     // creates player spirite
-    draw(){
+    draw(gameSpeed, frameTimeDelta){
+        if(this.running){
+            if(this.frameIndex >= this.spriteWalkImages.length){
+                this.frameIndex = 0;
+            }
+            this.image = this.spriteWalkImages[this.frameIndex];
+            this.frameIndex++;
+            this.walk_animation -= frameTimeDelta * gameSpeed; //makes sure animation runs same rate no matter the refresh rate.
+        }
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 

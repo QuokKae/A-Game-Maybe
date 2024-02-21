@@ -20,7 +20,7 @@ const min_jumpH = 150;
 const ground_width = 2400;
 const ground_height = 150;
 const ground_speed = 0.5;
-const game_speed_start = 0.75;
+const game_speed_start = 0.35;
 const game_speed_increment = 0.00001;
 
 // Game Objects
@@ -98,8 +98,8 @@ function gameLoop(currentTime){
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
-    player.draw();
     ground.draw();
+    player.draw();
 
     requestAnimationFrame(gameLoop);
 }
