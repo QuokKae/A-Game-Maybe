@@ -9,16 +9,16 @@ const canvas = document.getElementById("jumpgame");
 const ctx = canvas.getContext("2d");
 // sets canvas size
 const game_width = 780;
-const game_height = 300;
+const game_height = 200;
 // sets avatar size
-const avatar_width = 88 / 1.5;
-const avatar_height = 94 / 1.5;
+const avatar_width = 32;
+const avatar_height = 32;
 // sets jump height
 const max_jumpH = game_height;
-const min_jumpH = 250;
+const min_jumpH = 150;
 // sets ground size & speed
 const ground_width = 2400;
-const ground_height = 24;
+const ground_height = 150;
 const ground_speed = 0.5;
 const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
@@ -95,7 +95,7 @@ function gameLoop(currentTime){
     clearScreen();
     //Update Objects
     ground.update(gameSpeed, frameTimeDelta);
-    player.update(frameTimeDelta);
+    player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
     player.draw();

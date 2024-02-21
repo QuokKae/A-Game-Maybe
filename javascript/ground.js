@@ -11,10 +11,10 @@ export default class Ground {
         this.speed = speed;
         // sets positioning
         this.x = 0;
-        this.y = this.canvas.height - this.height - 2;
+        this.y = this.canvas.height - this.height + 10;
         // sets images
         this.groundImage = new Image();
-        this.groundImage.src = './assets/images/ground.png';
+        this.groundImage.src = './assets/images/floor.png';
     }
     draw(){
         this.ctx.drawImage(this.groundImage, this.x, this.y, this.width, this.height);
