@@ -4,6 +4,7 @@ console.log('this is a placer log')
 import Player from './player.js'
 import Ground from './background/ground.js'
 
+
 // sets up canvas variables
 const canvas = document.getElementById("jumpgame");
 const ctx = canvas.getContext("2d");

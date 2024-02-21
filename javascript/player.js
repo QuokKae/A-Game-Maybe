@@ -11,6 +11,7 @@ export default class Player {
     gravity = 3;
     running = true;
     frameIndex = 0;
+    
 
     constructor(ctx, width, height, minJumpH, maxJumpH, screenRatio){
         // sets canvas

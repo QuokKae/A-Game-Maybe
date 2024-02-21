@@ -16,6 +16,7 @@ export default class Ground {
         this.groundImage = new Image();
         this.groundImage.src = './assets/images/floor.png';
     }
+    
     draw(){
         this.ctx.drawImage(this.groundImage, this.x, this.y, this.width, this.height);
         // adds another ground image for a continuous loop
