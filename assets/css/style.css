@@ -1,0 +1,18 @@
+    /* margin and padding of overall page */
+* {
+    padding: 0;
+    margin: 0;
+}
+    /* positioning for the canvas container */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ccc;
+}
+    /* game container */
+canvas {
+    border: 2px solid black;
+    border-radius: 15px;
+}
