@@ -47,9 +47,15 @@ export default class ObstControl {
         this.obstacles.forEach((obst) => {
             obst.update(this.speed, gameSpeed, frameTimeDelta, this.screenRatio);
         });
+
+        this.obstacles = this.obstacles.filter((obst) => obst.x > -obst.width);
     }
 
     draw(){
         this.obstacles.forEach((obst) => obst.draw());
+    }
+ 
+    collideWith(sprite){
+        return this.obstacles.some((obst) => obst.collideWith(sprite));
     }
 }

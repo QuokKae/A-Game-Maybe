@@ -28,7 +28,7 @@ const game_speed_increment = 0.00001;
 
 const obstacle_config = [
     {width: 124 / 1.5, height: 109 / 1.5, image: './assets/images/obstacle_1.png'},
-    {width: 118 / 1.5, height: 130 / 1.5, image: './assets/images/obstacle_2.png'}
+    {width: 98 / 1.5, height: 82 / 1.5,  image: './assets/images/obstacle_2.png'}
 ];
 
 // Game Objects
@@ -41,6 +41,7 @@ let obstacleControl = null;
 let screenRatio = null;
 let previousTime = null;
 let gameSpeed = game_speed_start;
+let gameOver = false;
 
 function createSprites(){
     // player width & height
@@ -59,13 +60,13 @@ function createSprites(){
     tree = new Tree(ctx, groundW, groundH, ground_speed, screenRatio);
 
     // sets obstacles
-    const obstacleImages = obstacle_config.map(obstacle =>{
+    const obstacleImages = obstacle_config.map((obst) =>{
         const image = new Image();
-        image.src = obstacle.image;
+        image.src = obst.image;
         return{
             image: image,
-            width: obstacle.width * screenRatio,
-            height: obstacle.height * screenRatio,
+            width: obst.width * screenRatio,
+            height: obst.height * screenRatio,
         };
     });
 
@@ -96,10 +97,10 @@ function getRatio() {
 
     // if window is wider than the game width
     if(screenW / screenH < game_width / game_height) {
-        return screenW / game_width
+        return screenW / game_width;
     }
     else {
-        return screenH / game_height
+        return screenH / game_height;
     }
 }
 
@@ -117,13 +118,20 @@ function gameLoop(currentTime){
 
     const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
+
     clearScreen();
 
-    //Update Objects
-    tree.update(gameSpeed, frameTimeDelta);
-    ground.update(gameSpeed, frameTimeDelta);
-    obstacleControl.update(gameSpeed, frameTimeDelta);
-    player.update(gameSpeed, frameTimeDelta);
+    if(!gameOver){
+        //Update Objects
+        tree.update(gameSpeed, frameTimeDelta);
+        ground.update(gameSpeed, frameTimeDelta);
+        obstacleControl.update(gameSpeed, frameTimeDelta);
+        player.update(gameSpeed, frameTimeDelta);
+    }
+
+    if(!gameOver && obstacleControl.collideWith(player)){
+        gameOver = true;
+    }
 
     //Draw Objects
     background.draw();
@@ -131,6 +139,8 @@ function gameLoop(currentTime){
     ground.draw();
     obstacleControl.draw();
     player.draw();
+
+
 
     requestAnimationFrame(gameLoop);
 }
