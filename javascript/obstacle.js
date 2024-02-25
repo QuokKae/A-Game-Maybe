@@ -19,14 +19,15 @@ export default class Obst{
     collideWith(sprite) {
         const adjustBy = 1.4;
         if (
-            sprite.x < this.x + this.width / adjustBy &&
-            sprite.x + sprite.width / adjustBy > this.x  &&
-            sprite.y < this.y + this.height / adjustBy &&
-            sprite.height + sprite.y / adjustBy > this.y
+            sprite.posX < this.x + this.width / adjustBy &&
+            sprite.posX + sprite.width / adjustBy > this.x  &&
+            sprite.posY < this.y + this.height / adjustBy &&
+            sprite.height + sprite.posY / adjustBy > this.y
         ) {
             return true;
         }else {
             return false;
         }
+    
     }
 }
