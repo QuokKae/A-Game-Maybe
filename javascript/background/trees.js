@@ -14,7 +14,7 @@ export default class Tree {
         this.y = this.canvas.height - this.height;
         // sets background
         this.treeImage = new Image();
-        this.treeImage.src = '/assets/images/trees_front.png';
+        this.treeImage.src = './assets/images/trees_front.png';
     }
     draw(){
         this.ctx.drawImage(this.treeImage, this.x, this.y, this.width, this.height);
