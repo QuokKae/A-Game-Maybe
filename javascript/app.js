@@ -5,6 +5,7 @@ import Player from './player.js'
 import Ground from './background/ground.js'
 import Backgrd from './background/bg.js'
 import Tree from './background/trees.js';
+// import ObstControl from './obstacle-controller.js';
 
 // sets up canvas variables
 const canvas = document.getElementById("jumpgame");
@@ -25,11 +26,17 @@ const ground_speed = 0.2;
 const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
 
+// const obst_config = [
+//     {width: 124, height: 109, image: './assets/images/obstacle_1.png'},
+//     {width: 118, height: 130, image: './assets/images/obstacle_2.png'}
+// ];
+
 // Game Objects
 let player = null;
 let ground = null;
 let background = null;
 let tree = null;
+// let obstControl = null;
 
 let screenRatio = null;
 let previousTime = null;
@@ -50,6 +57,19 @@ function createSprites(){
     ground = new Ground(ctx, groundW, groundH, ground_speed, screenRatio);
     background = new Backgrd(ctx, groundW, groundH, ground_speed, screenRatio);
     tree = new Tree(ctx, groundW, groundH, ground_speed, screenRatio);
+
+//     const obstImages = obst_config.map(obstacle =>{
+//         const image = new Image();
+//         image.src = obstacle.image;
+//         return{
+//             image: image,
+//             width: obstacle.width * screenRatio,
+//             height: obstacle.height * screenRatio,
+//         };
+//     });
+
+//    obstControl = new ObstControl(ctx, obstImages, screenRatio, ground_speed);
+
 }
 
 // sets the canvas size by the screen ratio.
@@ -97,15 +117,18 @@ function gameLoop(currentTime){
     const frameTimeDelta = currentTime - previousTime;
     previousTime = currentTime;
     clearScreen();
+
     //Update Objects
     tree.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
+    // obstControl.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
     background.draw();
     tree.draw();
     ground.draw();
+    // obstControl.draw();
     player.draw();
 
     requestAnimationFrame(gameLoop);
