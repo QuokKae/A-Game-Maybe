@@ -24,33 +24,42 @@ export default class Player {
         this.screenRatio = screenRatio;
         // sets static avatar
         this.staticImage = new Image();
-        this.staticImage.src = './assets/images/avatar/walk/a0.png';
+        this.staticImage.src = './assets/images/dino/dino0.png';
         this.image = this.staticImage;
         // sprite size
         this.width = width;
         this.height = height;
         // sprite positioning
         this.posX = 20 * screenRatio;
-        this.posY = this.canvas.height - this.height - 22;
+        this.posY = this.canvas.height - this.height - 5;
         this.yStand = this.posY;
 
         // player walk animation images
         const playerAni1 = new Image();
-        playerAni1.src = './assets/images/avatar/walk/a1.png'
+        playerAni1.src = './assets/images/dino/dino1.png'
         const playerAni2 = new Image();
-        playerAni2.src = './assets/images/avatar/walk/a2.png'
+        playerAni2.src = './assets/images/dino/dino2.png'
         const playerAni3 = new Image();
-        playerAni3.src = './assets/images/avatar/walk/a3.png'
+        playerAni3.src = './assets/images/dino/dino3.png'
         const playerAni4 = new Image();
-        playerAni4.src = './assets/images/avatar/walk/a4.png'
+        playerAni4.src = './assets/images/dino/dino4.png'
         const playerAni5 = new Image();
-        playerAni5.src = './assets/images/avatar/walk/a5.png'
+        playerAni5.src = './assets/images/dino/dino5.png'
+        const playerAni6 = new Image();
+        playerAni6.src = './assets/images/dino/dino6.png'
+        const playerAni7 = new Image();
+        playerAni7.src = './assets/images/dino/dino7.png'
+        const playerAni8 = new Image();
+        playerAni8.src = './assets/images/dino/dino8.png'
         // pushes animation images to spriteWalkImages array
         this.spriteWalkImages.push(playerAni1);
         this.spriteWalkImages.push(playerAni2);
         this.spriteWalkImages.push(playerAni3);
         this.spriteWalkImages.push(playerAni4);
         this.spriteWalkImages.push(playerAni5);
+        this.spriteWalkImages.push(playerAni6);
+        this.spriteWalkImages.push(playerAni7);
+        this.spriteWalkImages.push(playerAni8);
 
         // keyboard inputs
         window.removeEventListener('keydown', this.keydown);
@@ -80,7 +89,7 @@ export default class Player {
             }
             this.image = this.spriteWalkImages[this.frameIndex];
             this.frameIndex++;
-            // this.walk_animation -= frameTimeDelta * gameSpeed; //makes sure animation runs same rate no matter the refresh rate.
+            this.walk_animation -= frameTimeDelta * gameSpeed; //makes sure animation runs same rate no matter the refresh rate.
         }
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }

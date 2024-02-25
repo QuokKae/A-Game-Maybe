@@ -2,14 +2,15 @@ console.log('this is a placer log')
 
 // imports other js files necessary for project
 import Player from './player.js'
-import Ground from './background/ground.js'
+import Ground from './ground.js'
+import Background from './background.js'
 
 
 // sets up canvas variables
 const canvas = document.getElementById("jumpgame");
 const ctx = canvas.getContext("2d");
 // sets canvas size
-const game_width = 780;
+const game_width = 500;
 const game_height = 200;
 // sets avatar size
 const avatar_width = 32;
@@ -18,8 +19,8 @@ const avatar_height = 32;
 const max_jumpH = game_height;
 const min_jumpH = 150;
 // sets ground size & speed
-const ground_width = 1280;
-const ground_height = 220;
+const ground_width = 512;
+const ground_height = 256;
 const ground_speed = 0.5;
 const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
@@ -47,17 +48,15 @@ function createSprites(){
     ground = new Ground(ctx, groundW, groundH, ground_speed, screenRatio);
 }
 
-// sets the canvas size dynamically by the screen ratio.
+// sets the canvas size by the screen ratio.
 function setScreen() {
     screenRatio = getRatio();
-    canvas.width = game_width * screenRatio;
-    canvas.height = game_height * screenRatio;
+    canvas.width = screenRatio * game_width;
+    canvas.height = screenRatio * game_height;
     createSprites();
 }
 
 setScreen();
-
-window.addEventListener("resize", setScreen);
 
 // Finds the screen ratio of the device
 function getRatio() {
@@ -95,10 +94,12 @@ function gameLoop(currentTime){
     previousTime = currentTime;
     clearScreen();
     //Update Objects
+    background.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
+    background.draw();
     ground.draw();
     player.draw();
 
