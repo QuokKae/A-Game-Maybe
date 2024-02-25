@@ -3,9 +3,9 @@ console.log('this is a placer log')
 // imports other js files necessary for project
 import Player from './player.js'
 import Ground from './background/ground.js'
-import Backgrd from './background/bg.js'
+import Background from './background/background.js'
 import Tree from './background/trees.js';
-// import ObstControl from './obstacle-controller.js';
+import ObstControl from './obstControl.js';
 
 // sets up canvas variables
 const canvas = document.getElementById("jumpgame");
@@ -26,17 +26,17 @@ const ground_speed = 0.2;
 const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
 
-// const obst_config = [
-//     {width: 124, height: 109, image: './assets/images/obstacle_1.png'},
-//     {width: 118, height: 130, image: './assets/images/obstacle_2.png'}
-// ];
+const obstacle_config = [
+    {width: 124 / 1.5, height: 109 / 1.5, image: './assets/images/obstacle_1.png'},
+    {width: 118 / 1.5, height: 130 / 1.5, image: './assets/images/obstacle_2.png'}
+];
 
 // Game Objects
 let player = null;
 let ground = null;
 let background = null;
 let tree = null;
-// let obstControl = null;
+let obstacleControl = null;
 
 let screenRatio = null;
 let previousTime = null;
@@ -55,20 +55,21 @@ function createSprites(){
     // sets sprites
     player = new Player(ctx, playerW, playerH, minJump, maxJump, screenRatio);
     ground = new Ground(ctx, groundW, groundH, ground_speed, screenRatio);
-    background = new Backgrd(ctx, groundW, groundH, ground_speed, screenRatio);
+    background = new Background(ctx, groundW, groundH, ground_speed, screenRatio);
     tree = new Tree(ctx, groundW, groundH, ground_speed, screenRatio);
 
-//     const obstImages = obst_config.map(obstacle =>{
-//         const image = new Image();
-//         image.src = obstacle.image;
-//         return{
-//             image: image,
-//             width: obstacle.width * screenRatio,
-//             height: obstacle.height * screenRatio,
-//         };
-//     });
+    // sets obstacles
+    const obstacleImages = obstacle_config.map(obstacle =>{
+        const image = new Image();
+        image.src = obstacle.image;
+        return{
+            image: image,
+            width: obstacle.width * screenRatio,
+            height: obstacle.height * screenRatio,
+        };
+    });
 
-//    obstControl = new ObstControl(ctx, obstImages, screenRatio, ground_speed);
+    obstacleControl = new ObstControl(ctx, obstacleImages, screenRatio, ground_speed);
 
 }
 
@@ -121,14 +122,14 @@ function gameLoop(currentTime){
     //Update Objects
     tree.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
-    // obstControl.update(gameSpeed, frameTimeDelta);
+    obstacleControl.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
     background.draw();
     tree.draw();
     ground.draw();
-    // obstControl.draw();
+    obstacleControl.draw();
     player.draw();
 
     requestAnimationFrame(gameLoop);

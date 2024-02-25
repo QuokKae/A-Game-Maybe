@@ -1,4 +1,5 @@
-export default class Backgrd {
+// static background hills
+export default class Background {
     constructor(ctx, width, height, speed, screenRatio){
         // canvas
         this.ctx = ctx;
@@ -30,5 +31,4 @@ export default class Backgrd {
     update(gameSpeed, frameTimeDelta){
         this.x -= gameSpeed * frameTimeDelta * this.speed * this.screenRatio;
     }
-
 }

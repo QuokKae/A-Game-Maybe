@@ -1,16 +1,16 @@
-import Obstacle from "./obstacle.js";
+import Obst from "./obstacle.js";
 
 export default class ObstControl {
-    obst_interval_min = 500;
-    obst_interval_max = 2000;
+    obstacle_interval_min = 1000;
+    obstacle_interval_max = 4000;
 
     nextObstacleInterval = null;
-    obstacle = [];
+    obstacles = [];
 
-    constructor(ctx, obstImages, screenRatio, speed){
+    constructor(ctx, obstacleImages, screenRatio, speed){
         this.ctx = ctx;
         this.canvas = ctx.canvas;
-        this.obstImages = obstImages;
+        this.obstacleImages = obstacleImages;
         this.screenRatio = screenRatio;
         this.speed = speed;
 
@@ -18,7 +18,7 @@ export default class ObstControl {
     }
 
     setNextTime(){
-        const num = this.getRandomNum(this.obst_interval_min, this.obst_interval_max);
+        const num = this.getRandomNum(this.obstacle_interval_min, this.obstacle_interval_max);
 
         this.nextObstacleInterval = num;
     }
@@ -28,13 +28,13 @@ export default class ObstControl {
     }
 
     createObstacle(){
-        const index = this.getRandomNum(0, this.obstImages.length - 1);
-        const obstacleImages = this.obstImages[index];
+        const index = this.getRandomNum(0, this.obstacleImages.length - 1);
+        const obstImages = this.obstacleImages[index];
         const x = this.canvas.width * 1.5;
-        const y = this.canvas.height - obstacleImages.height;
-        const obst = new Obstacle(this.ctx, x, y, obstacleImages.width, obstacleImages.height, obstacleImages.image);
+        const y = this.canvas.height - obstImages.height;
+        const obst = new Obst(this.ctx, x, y, obstImages.width, obstImages.height, obstImages.image);
 
-        this.obstacle.push(obst);
+        this.obstacles.push(obst);
     }
 
     update(gameSpeed, frameTimeDelta) {
@@ -44,12 +44,12 @@ export default class ObstControl {
         }
         this.nextObstacleInterval -= frameTimeDelta;
 
-        this.obst.forEach((obst) => {
+        this.obstacles.forEach((obst) => {
             obst.update(this.speed, gameSpeed, frameTimeDelta, this.screenRatio);
         });
     }
 
     draw(){
-        this.obst.forEach((obst) => obst.draw());
+        this.obstacles.forEach((obst) => obst.draw());
     }
 }
