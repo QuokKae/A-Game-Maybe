@@ -94,7 +94,7 @@ function gameLoop(currentTime){
     previousTime = currentTime;
     clearScreen();
     //Update Objects
-    // background.update(gameSpeed, frameTimeDelta);
+    background.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
