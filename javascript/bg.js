@@ -1,4 +1,4 @@
-export default class Background {
+export default class Backgrd {
     constructor(ctx, width, height, speed, screenRatio){
         // canvas
         this.ctx = ctx;

@@ -3,7 +3,7 @@ console.log('this is a placer log')
 // imports other js files necessary for project
 import Player from './player.js'
 import Ground from './ground.js'
-import Background from './background.js'
+// import Backgrd from './bg.js'
 
 
 // sets up canvas variables
@@ -94,12 +94,12 @@ function gameLoop(currentTime){
     previousTime = currentTime;
     clearScreen();
     //Update Objects
-    background.update(gameSpeed, frameTimeDelta);
+    // background.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
-    background.draw();
+    // background.draw();
     ground.draw();
     player.draw();
 
