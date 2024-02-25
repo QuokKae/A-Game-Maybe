@@ -2,9 +2,9 @@ console.log('this is a placer log')
 
 // imports other js files necessary for project
 import Player from './player.js'
-import Ground from './ground.js'
-// import Backgrd from './bg.js'
-
+import Ground from './background/ground.js'
+import Backgrd from './background/bg.js'
+import Tree from './background/trees.js';
 
 // sets up canvas variables
 const canvas = document.getElementById("jumpgame");
@@ -21,13 +21,15 @@ const min_jumpH = 150;
 // sets ground size & speed
 const ground_width = 512;
 const ground_height = 256;
-const ground_speed = 0.5;
+const ground_speed = 0.2;
 const game_speed_start = 0.75;
 const game_speed_increment = 0.00001;
 
 // Game Objects
 let player = null;
 let ground = null;
+let background = null;
+let tree = null;
 
 let screenRatio = null;
 let previousTime = null;
@@ -46,6 +48,8 @@ function createSprites(){
     // sets sprites
     player = new Player(ctx, playerW, playerH, minJump, maxJump, screenRatio);
     ground = new Ground(ctx, groundW, groundH, ground_speed, screenRatio);
+    background = new Backgrd(ctx, groundW, groundH, ground_speed, screenRatio);
+    tree = new Tree(ctx, groundW, groundH, ground_speed, screenRatio);
 }
 
 // sets the canvas size by the screen ratio.
@@ -94,12 +98,13 @@ function gameLoop(currentTime){
     previousTime = currentTime;
     clearScreen();
     //Update Objects
-    background.update(gameSpeed, frameTimeDelta);
+    tree.update(gameSpeed, frameTimeDelta);
     ground.update(gameSpeed, frameTimeDelta);
     player.update(gameSpeed, frameTimeDelta);
 
     //Draw Objects
-    // background.draw();
+    background.draw();
+    tree.draw();
     ground.draw();
     player.draw();
 
