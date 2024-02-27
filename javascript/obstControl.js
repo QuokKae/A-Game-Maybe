@@ -1,7 +1,7 @@
 import Obst from "./obstacle.js";
 
 export default class ObstControl {
-    obstacle_interval_min = 1000;
+    obstacle_interval_min = 500;
     obstacle_interval_max = 4000;
 
     nextObstacleInterval = null;
@@ -48,14 +48,18 @@ export default class ObstControl {
             obst.update(this.speed, gameSpeed, frameTimeDelta, this.screenRatio);
         });
 
-        this.obstacles = this.obstacles.filter((obst) => obst.x > -obst.width);
+        this.obstacles = this.obstacles.filter((obst) => obst.x > -obst.width)
     }
 
     draw(){
         this.obstacles.forEach((obst) => obst.draw());
     }
- 
+
     collideWith(sprite){
-        return this.obstacles.some((obst) => obst.collideWith(sprite));
+        return this.obstacles.some(obst => obst.collideWith(sprite));
+    }
+
+    reset(){
+        this.obstacles = [];
     }
 }
